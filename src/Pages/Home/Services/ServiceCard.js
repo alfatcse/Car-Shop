@@ -13,7 +13,7 @@ const ServiceCard = ({ service }) => {
                 <p className='text-2xl text-orange-600 font-semibold'>Price ${price}</p>
                 <div className="card-actions">
                     <Link to={`/checkout/${_id}`}>
-                        <button className="btn btn-primary">Buy Now</button>
+                        <button className="btn btn-primary">Check Out</button>
                     </Link>
                 </div>
             </div>

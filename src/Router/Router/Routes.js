@@ -3,6 +3,8 @@ import Main from "../../Layout/Main";
 import Checkout from "../../Pages/Checkout/Checkout";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import Newor from "../../Pages/Orders/Newor";
+import Orders from "../../Pages/Orders/Orders";
 import SignUp from "../../Pages/SignUp/SignUp";
 const router=createBrowserRouter([
     {
@@ -25,6 +27,14 @@ const router=createBrowserRouter([
           path:'/checkout/:id',
           element:<Checkout></Checkout>,
           loader:({params})=>fetch(`http://localhost:5006/service/${params.id}`)
+        },
+        {
+          path:'/orders',
+          element:<Orders></Orders>
+        },
+        {
+          path:'/new',
+          element:<Newor></Newor>
         }
       ]
     }
