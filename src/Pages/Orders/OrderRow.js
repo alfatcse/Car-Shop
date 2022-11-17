@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 
 const OrderRow = ({ order }) => {
-    const { serviceName, price, email, customer, phone, service } = order;
+    const { _id,serviceName, price, email, customer, phone, service } = order;
     const [orderService, setOrderservice] = useState({});
     useEffect(() => {
         fetch(`http://localhost:5006/service/${service}`)
             .then(res => res.json())
             .then(data => setOrderservice(data))
     }, [service])
+    const handleDelete=id=>{
+          const proceed=window.confirm('Are you sure');
+          if(proceed)
+          {
+            fetch(`http://localhost:5006/service/${id}`,{
+                method:'DELETE'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+            })
+          }
+    }
     return (
         <tr>
             <th>
                 <label>
-                    <button className='btn btn-ghost'>X</button>
+                    <button onClick={()=>handleDelete(_id)} className='btn btn-ghost'>X</button>
                 </label>
             </th>
             <td>
