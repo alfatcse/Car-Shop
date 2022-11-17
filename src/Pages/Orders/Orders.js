@@ -7,10 +7,27 @@ const Orders = () => {
     console.log('userCkec', user);
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5006/orders?email=${user.email}`)
+        fetch(`http://localhost:5006/orders?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setOrders(data))
     }, [user?.email])
+    const handleDelete = id => {
+        const proceed = window.confirm('Are you sure');
+        if (proceed) {
+            fetch(`http://localhost:5006/orders/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.deletedCount > 0) {
+                        alert('deleted');
+                        const remaining = orders.filter(odr => odr._id !== id);
+                        setOrders(remaining);
+                    }
+                })
+        }
+    }
     return (
         <div>
             <h1>order</h1>
@@ -32,9 +49,9 @@ const Orders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                       {
-                        orders.map(order=><OrderRow key={order._id} order={order}></OrderRow>)
-                       }
+                        {
+                            orders.map(order => <OrderRow key={order._id} handleDelete={handleDelete} order={order}></OrderRow>)
+                        }
                     </tbody>
                 </table>
             </div>
