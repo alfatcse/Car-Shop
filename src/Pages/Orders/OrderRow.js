@@ -12,7 +12,7 @@ const OrderRow = ({ order }) => {
           const proceed=window.confirm('Are you sure');
           if(proceed)
           {
-            fetch(`http://localhost:5006/service/${id}`,{
+            fetch(`http://localhost:5006/orders/${id}`,{
                 method:'DELETE'
             })
             .then(res=>res.json())
