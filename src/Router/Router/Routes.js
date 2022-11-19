@@ -6,6 +6,7 @@ import Login from "../../Pages/Login/Login";
 import Newor from "../../Pages/Orders/Newor";
 import Orders from "../../Pages/Orders/Orders";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 const router=createBrowserRouter([
     {
       path:'/',
@@ -25,7 +26,7 @@ const router=createBrowserRouter([
         },
         {
           path:'/checkout/:id',
-          element:<Checkout></Checkout>,
+          element:<PrivateRoute><Checkout></Checkout></PrivateRoute>,
           loader:({params})=>fetch(`http://localhost:5006/service/${params.id}`)
         },
         {
