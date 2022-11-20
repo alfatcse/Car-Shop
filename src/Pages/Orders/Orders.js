@@ -12,19 +12,26 @@ const Orders = () => {
                 authorization: `Bearer ${localStorage.getItem('genius-token')}`
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut();
+                }
+                return res.json()
+            })
             .then(data => setOrders(data))
-    }, [user?.email])
+    }, [user?.email, logOut])
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure');
         if (proceed) {
             fetch(`http://localhost:5006/orders/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                }
+
             })
                 .then(res => {
-                    if (res.status === 401 || res.status === 403) {
-                        logOut();
-                    }
+
                     return res.json()
                 })
                 .then(data => {
@@ -42,7 +49,8 @@ const Orders = () => {
         fetch(`http://localhost:5006/orders/${id}`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('genius-token')}`
             },
             body: JSON.stringify({ status: 'Approved' })
         })

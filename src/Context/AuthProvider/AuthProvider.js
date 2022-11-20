@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth,email,password);
     }
     const logOut=()=>{
+        localStorage.removeItem('genius-token');
         return signOut(auth);
     }
     useEffect(() => {
