@@ -27,7 +27,7 @@ const router=createBrowserRouter([
         {
           path:'/checkout/:id',
           element:<PrivateRoute><Checkout></Checkout></PrivateRoute>,
-          loader:({params})=>fetch(`http://localhost:5006/service/${params.id}`)
+          loader:({params})=>fetch(`https://genius-car-server-lime-kappa.vercel.app/service/${params.id}`)
         },
         {
           path:'/orders',
