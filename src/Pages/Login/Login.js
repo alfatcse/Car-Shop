@@ -3,23 +3,38 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 const Login = () => {
-    const {login}=useContext(AuthContext);
-    const location=useLocation();
-    const navigate=useNavigate();
-    const from=location.state?.from?.pathname||'/';
-    const handleLogin=(event)=>{
+    const { login } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
+    const handleLogin = (event) => {
         event.preventDefault();
-        const form=event.target;
-        const email=form.email.value;
-        const password=form.password.value;
-        console.log(email,password);
-        login(email,password)
-        .then(result=>{
-            const user=result.user;
-            console.log(user);
-            navigate(from,{replace:true})
-        })
-        .then(e=>console.error(e));
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        login(email, password)
+            .then(result => {
+                const user = result.user;
+                const currentuser = {
+                    email: user.email
+                }
+                console.log(user);
+                fetch('http://localhost:5006/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentuser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem('genius-token', data.token);
+                        navigate(from,{replace:true})
+                    })
+            })
+            .then(e => console.error(e));
     }
     return (
         <div className="hero w-full my-20">
