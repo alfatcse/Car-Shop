@@ -21,7 +21,7 @@ const Login = () => {
                     email: user.email
                 }
                 console.log(user);
-                fetch('https://genius-car-server-lime-kappa.vercel.app/jwt', {
+                fetch('http://localhost:5006/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

@@ -7,7 +7,7 @@ const Orders = () => {
     console.log('userCkec', user);
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        fetch(`https://genius-car-server-lime-kappa.vercel.app/orders?email=${user?.email}`, {
+        fetch(`http://localhost:5006/orders?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('genius-token')}`
             }
@@ -23,7 +23,7 @@ const Orders = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure');
         if (proceed) {
-            fetch(`https://genius-car-server-lime-kappa.vercel.app/orders/${id}`, {
+            fetch(`http://localhost:5006/orders/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('genius-token')}`
@@ -46,7 +46,7 @@ const Orders = () => {
         }
     }
     const handleStatusUpdate = id => {
-        fetch(`https://genius-car-server-lime-kappa.vercel.app/orders/${id}`, {
+        fetch(`http://localhost:5006/orders/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

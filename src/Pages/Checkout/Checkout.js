@@ -25,7 +25,7 @@ const Checkout = () => {
         if (phone.length > 10) {
             alert('Phone number should be 10 digit');
         }
-        fetch('https://genius-car-server-lime-kappa.vercel.app/orders', {
+        fetch('http://localhost:5006/orders', {
             method: 'post',
             headers: {
                 'content-type': 'application/json',
