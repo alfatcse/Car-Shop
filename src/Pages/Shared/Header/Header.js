@@ -13,6 +13,8 @@ const Header = () => {
             user?.email ?
                 <>
                     <li className='font-semibold'><Link to='/orders'>Order</Link></li>
+                    <li className='font-semibold'><Link to='/carrepair'>Car Repair</Link></li>
+
                     <li className='font-semibold'><button onClick={handleLogout} className='btn-ghost'>Sign Out</button></li>
                 </>
                 :
