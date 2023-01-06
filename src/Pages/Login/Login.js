@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
-import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+
 import { setAuthToken } from '../../api/Auth';
 const Login = () => {
     const { login,googleSignin } = useContext(AuthContext);
@@ -67,7 +67,7 @@ const Login = () => {
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" />
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                              <Link to='/forgotpass'><a href="#" className="label-text-alt link link-hover">Forgot password?</a></Link>  
                             </label>
                         </div>
                         <div className="form-control mt-6">
