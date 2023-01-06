@@ -3,11 +3,20 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import { setAuthToken } from '../../api/Auth';
 const Login = () => {
-    const { login } = useContext(AuthContext);
+    const { login,googleSignin } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+    const handleGoogleSignIn=()=>{
+        googleSignin().then(result=>{
+            const user=result.user;
+            console.log(user);
+            setAuthToken(user);
+        }).catch(e=>console.log(e))
+        
+    } 
     const handleLogin = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -64,9 +73,13 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Login</button>
                         </div>
+                        <div className='divider'>OR</div>
+                        <div className="form-control ">
+                            <button  onClick={handleGoogleSignIn} className="btn btn-primary">Log in With Google</button>
+                        </div>
+                        <div className='divider'>OR</div>
+                        <p className='text-center' >New to Genius Car <Link className='text-orange-600 font-bold' to="/signup">Create New Account</Link> </p>
                     </form>
-                    <p className='text-center'>New to Genius Car <Link className='text-orange-600 font-bold' to="/signup">Signup</Link> </p>
-                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
